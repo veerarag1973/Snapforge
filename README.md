@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="logo.png" alt="Snapforge" width="120" />
+  <img src="logo.png" alt="Snapforge" width="80" /><br/>
+  <strong style="font-size:2em;">Snapforge</strong><br/>
+  <em>A composable open-source toolkit for LLM and agentic AI observability.</em>
 </p>
 
-# Snapforge
-
-**A composable open-source toolkit for LLM and agentic AI observability.**
+---
 
 ---
 
