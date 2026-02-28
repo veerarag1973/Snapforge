@@ -18,12 +18,11 @@ Built for individual developers, DevOps teams, and enterprise ML engineers — a
 
 Modern LLM applications — especially agentic ones — are hard to observe. Prompts drift, costs balloon silently, tool calls fail without trace, and multi-step agent runs are nearly impossible to debug after the fact.
 
-Snapforge addresses the four critical gaps in LLM observability:
+Snapforge addresses three critical gaps in the LLM development lifecycle:
 
 - **Output quality** — did the model produce what you expected?
-- **Agent execution** — what did the agent actually do, step by step?
-- **Cost and latency** — what did that run cost, and how long did it take?
-- **Tool call correctness** — did the model use its tools the right way?
+- **Prompt governance** — are prompts versioned, auditable, and enterprise-ready?
+- **Prompt engineering** — can prompts be composed, templated, and reused systematically?
 
 The goal is not to be a platform. Each Snapforge tool can go viral on its own. The ecosystem emerges from composition — not from a hosted dashboard or locked-in infrastructure.
 
@@ -31,12 +30,11 @@ The goal is not to be a platform. Each Snapforge tool can go viral on its own. T
 
 ## The Toolkit
 
-| Tool | Purpose | Package |
-|---|---|---|
-| [**llm-diff**](#llm-diff) | LLM output quality comparison and evaluation | `pip install llm-diff` |
-| [**llm-trace**](#llm-trace) | Multi-step agent execution tracing | `pip install llm-trace` |
-| [**llm-cost**](#llm-cost) | Cost and latency tracking per call, run, and agent | `pip install llm-cost` |
-| [**llm-inspect**](#llm-inspect) | Tool call inspection for agentic systems | `pip install llm-inspect` |
+| Tool | Purpose | Status | Package |
+|---|---|---|---|
+| [**llm-diff**](#llm-diff) | LLM output quality comparison and evaluation | ✅ Done | `pip install llm-diff` |
+| [**promptlock**](#promptlock) | Prompt version control and enterprise governance | 🔧 Under development | — |
+| [**promptblock**](#promptblock) | Prompt template engine with variable management, composition, and inheritance | 🔧 Under development | — |
 
 ---
 
@@ -49,66 +47,57 @@ Diffs LLM outputs across model versions, prompt changes, or time — so you can 
 - Side-by-side output comparison
 - Regression detection across prompt versions
 - Per-call cost tracking
-- Integrates with `llm-trace` spans for quality regression on agentic runs
+- Pairs with `promptlock` to tie quality regressions back to specific prompt versions
 
-**[→ View llm-diff](https://github.com/snapforge/llm-diff)**
-
----
-
-### llm-trace
-
-> _The agent execution layer._
-
-Captures the full span tree of an agentic run — which tools were called, in what order, with what inputs and outputs, and where the run branched or failed. Works across any agent framework, not just LangChain.
-
-- Full OpenTelemetry-compatible span capture
-- Tool call ordering and branching visibility
-- Framework-agnostic — works with LangChain, LlamaIndex, custom agents, and raw API calls
-- Feeds directly into `llm-diff` and `llm-cost`
-
-**[→ View llm-trace](https://github.com/snapforge/llm-trace)**
+**[→ View llm-diff](https://github.com/veerarag1973/llmdiff)**
 
 ---
 
-### llm-cost
+### promptlock _(under development)_
 
-> _The cost and latency layer._
+> _The prompt governance layer._
 
-Token and USD accounting at every level — per API call, per agent run, per workflow — with trend views over time. A natural expansion of the cost tracking already in `llm-diff` v1.2.
+Version control and enterprise governance for prompts — so every prompt change is tracked, auditable, and reversible. Designed for teams that need to manage prompts at scale without losing control.
 
-- Per-call and per-run token and USD tracking
-- Latency breakdowns across model calls and tool calls
-- Trend views for cost drift detection
-- Ingests `llm-trace` span data natively
+- Full version history for every prompt
+- Diff and rollback across prompt versions
+- Approval workflows and access controls for enterprise teams
+- Integrates with `llm-diff` to surface quality regressions tied to specific prompt changes
+- Emits `llm-schema` events for full audit trail
 
-**[→ View llm-cost](https://github.com/snapforge/llm-cost)**
-
----
-
-### llm-inspect
-
-> _The tool call inspection layer._
-
-The agentic equivalent of a network inspector. Surfaces exactly what arguments were passed to each tool, what it returned, and whether the model used the result correctly downstream.
-
-- Argument and return value capture for every tool call
-- Model reasoning trace — did it act on what the tool returned?
-- Highlights tool misuse and ignored results
-- Pairs with `llm-trace` for full agentic run visibility
-
-**[→ View llm-inspect](https://github.com/snapforge/llm-inspect)**
+> **Under development.** Follow along or contribute at [github.com/veerarag1973/promptlock](https://github.com/veerarag1973/promptlock).
 
 ---
 
-## Shared Schema
+### promptblock
 
-All four tools emit and consume a shared **OpenTelemetry-compatible JSON/OTLP event schema**. This is the glue.
+> _The prompt engineering layer._
 
-It means:
-- `llm-trace` output pipes into `llm-diff` for quality regression — no custom integration
-- `llm-cost` reads from `llm-trace` spans natively
-- Enterprise users route all events into Grafana, Datadog, or any OTLP-compatible backend without modification
-- Each tool is independently useful; composing them is additive, not required
+A prompt template engine with variable management, composition, and inheritance — so complex prompts can be built systematically rather than assembled by hand.
+
+- Variable injection with type validation
+- Template composition — build complex prompts from reusable blocks
+- Inheritance — extend and override base templates cleanly
+- Works alongside `promptlock` for versioned, governed template libraries
+
+**[→ View promptblock](https://github.com/veerarag1973/promptblock)**
+
+---
+
+## Shared Foundation
+
+### llm-schema _(under development)_
+
+> _The shared event schema._
+
+`llm-schema` defines the OpenTelemetry-compatible JSON/OTLP event schema that all Snapforge tools emit and consume. This is the glue that makes the ecosystem composable without custom integration.
+
+- OpenTelemetry-compatible JSON/OTLP format
+- Covers prompt events, evaluation results, governance audit trails, and template rendering spans
+- Routes cleanly into Grafana, Datadog, or any OTLP-compatible backend
+- Each Snapforge tool is independently useful; `llm-schema` makes composing them additive, not required
+
+> **Under development.** Follow along or contribute at [github.com/veerarag1973/llm-schema](https://github.com/veerarag1973/llm-schema).
 
 ---
 
