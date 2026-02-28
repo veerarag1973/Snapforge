@@ -69,7 +69,7 @@ Version control and enterprise governance for prompts — so every prompt change
 
 ---
 
-### promptblock
+### promptblock _(under development)_
 
 > _The prompt engineering layer._
 
@@ -80,7 +80,7 @@ A prompt template engine with variable management, composition, and inheritance 
 - Inheritance — extend and override base templates cleanly
 - Works alongside `promptlock` for versioned, governed template libraries
 
-**[→ View promptblock](https://github.com/veerarag1973/promptblock)**
+> **Under development.** Follow along or contribute at [github.com/veerarag1973/promptblock](https://github.com/veerarag1973/promptblock).
 
 ---
 
