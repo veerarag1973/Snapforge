@@ -35,6 +35,7 @@ The goal is not to be a platform. Each Snapforge tool can go viral on its own. T
 | [**llm-diff**](#llm-diff) | LLM output quality comparison and evaluation | ✅ Done | `pip install llm-diff` |
 | [**promptlock**](#promptlock) | Prompt version control and enterprise governance | 🔧 Under development | — |
 | [**promptblock**](#promptblock) | Prompt template engine with variable management, composition, and inheritance | 🔧 Under development | — |
+| [**llm-schema**](#llm-schema) | Shared OpenTelemetry-compatible event schema all tools emit and consume | 🔧 Under development | — |
 
 ---
 
