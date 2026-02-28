@@ -1,10 +1,6 @@
-<p align="center">
-  <img src="logo.png" alt="Snapforge" width="80" /><br/>
-  <strong style="font-size:2em;">Snapforge</strong><br/>
-  <em>A composable open-source toolkit for LLM and agentic AI observability.</em>
-</p>
+<h1><img src="logo.png" alt="Snapforge" width="40" style="vertical-align:middle;margin-right:8px;"/> Snapforge</h1>
 
----
+**A composable open-source toolkit for LLM and agentic AI observability.**
 
 ---
 
