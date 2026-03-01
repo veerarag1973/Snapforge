@@ -528,7 +528,6 @@
   <ul class="nav-links">
     <li><a href="#observability">Why It Matters</a></li>
     <li><a href="#what">About</a></li>
-    <li><a href="#toolkit">Toolkit</a></li>
     <li><a href="#tools">Tools</a></li>
     <li><a href="#philosophy">Philosophy</a></li>
     <li><a href="https://github.com/veerarag1973" target="_blank" rel="noopener">GitHub ↗</a></li>
@@ -540,7 +539,6 @@
 <nav class="mobile-menu" id="mobileMenu">
   <a href="#observability" onclick="closeMenu()">Why It Matters</a>
   <a href="#what" onclick="closeMenu()">About</a>
-  <a href="#toolkit" onclick="closeMenu()">Toolkit</a>
   <a href="#tools" onclick="closeMenu()">Tools</a>
   <a href="#philosophy" onclick="closeMenu()">Philosophy</a>
   <a href="https://github.com/veerarag1973" target="_blank" rel="noopener">GitHub ↗</a>
@@ -553,7 +551,7 @@
   <h1>Spanforge</h1>
   <p class="hero-sub">A composable open-source toolkit for LLM and agentic AI observability.</p>
   <div class="hero-actions">
-    <a class="btn btn-primary" href="#toolkit">Explore the Toolkit</a>
+    <a class="btn btn-primary" href="#tools">Explore the Tools</a>
     <a class="btn btn-secondary" href="https://github.com/veerarag1973" target="_blank" rel="noopener">View on GitHub ↗</a>
   </div>
 </header>
@@ -697,210 +695,6 @@
         <div class="domain-title">Shared Foundation</div>
         <div class="domain-desc">A unified, interoperable base that every tool in the ecosystem builds on &mdash; no glue code required.</div>
       </div>
-    </div>
-  </div>
-</section>
-
-<hr class="section-divider" />
-
-<!-- ── TOOLKIT ── -->
-<section id="toolkit">
-  <div class="container fade-in">
-    <p class="section-label">The Ecosystem</p>
-    <h2>17 tools. 6 domains. One shared schema.</h2>
-    <p class="ecosystem-intro">
-      Every tool is independently installable, solves one problem sharply, and emits
-      <code>llm-schema</code> events &mdash; so they compose freely with each other and
-      drop into any OTLP-compatible backend.
-    </p>
-
-    <div class="eco-categories">
-
-      <!-- Versioning & Management -->
-      <div class="eco-category">
-        <div class="eco-cat-header">
-          <span class="eco-cat-icon">🗂️</span>
-          <span class="eco-cat-label">Versioning &amp; Management</span>
-          <div class="eco-cat-line"></div>
-        </div>
-        <div class="eco-chips-grid">
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name green">llm-diff</span>
-              <span class="badge badge-done">✅ Live</span>
-            </div>
-            <div class="eco-chip-desc">Diff LLM outputs across model versions, prompt changes, or time. Detect regressions, track costs.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">promptlock</span>
-              <span class="badge badge-dev">🔧 In Dev</span>
-            </div>
-            <div class="eco-chip-desc">Prompt version control and enterprise governance with approval workflows and audit trails.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">promptblock</span>
-              <span class="badge badge-dev">🔧 In Dev</span>
-            </div>
-            <div class="eco-chip-desc">Prompt template engine with variable injection, composition, and inheritance.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Observability & Tracing -->
-      <div class="eco-category">
-        <div class="eco-cat-header">
-          <span class="eco-cat-icon">🔭</span>
-          <span class="eco-cat-label">Observability &amp; Tracing</span>
-          <div class="eco-cat-line"></div>
-        </div>
-        <div class="eco-chips-grid">
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-trace</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Framework-agnostic agent span tracing, fully OpenTelemetry-compatible.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-cost</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Token + USD cost tracking with budgets and trend alerts across every call.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-inspect</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Tool call inspector: arguments, returns, and model reasoning audit for every step.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Evaluation & Testing -->
-      <div class="eco-category">
-        <div class="eco-cat-header">
-          <span class="eco-cat-icon">🧪</span>
-          <span class="eco-cat-label">Evaluation &amp; Testing</span>
-          <div class="eco-cat-line"></div>
-        </div>
-        <div class="eco-chips-grid">
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">evalkit</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Scenario-based agent evaluation framework with regression testing pipelines.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">agentping</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Agent health checker &mdash; runs automated test suites against live agent endpoints.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-assert</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Assertion library for LLM outputs: contains X, matches schema, sentiment &gt; Y.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Security & Safety -->
-      <div class="eco-category">
-        <div class="eco-cat-header">
-          <span class="eco-cat-icon">🔒</span>
-          <span class="eco-cat-label">Security &amp; Safety</span>
-          <div class="eco-cat-line"></div>
-        </div>
-        <div class="eco-chips-grid">
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">promptguard</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Prompt injection firewall with input/output scanning and configurable guardrail policies.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-redact</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">PII detection and redaction in prompts and responses before they touch any log.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-fence</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Output schema enforcement and type-safe structured output validation at runtime.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Infrastructure & Runtime -->
-      <div class="eco-category">
-        <div class="eco-cat-header">
-          <span class="eco-cat-icon">⚙️</span>
-          <span class="eco-cat-label">Infrastructure &amp; Runtime</span>
-          <div class="eco-cat-line"></div>
-        </div>
-        <div class="eco-chips-grid">
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">agentboard</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Self-hosted local dashboard for agent run history &mdash; no signup, no cloud required.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">toolsmith</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">SDK for defining LLM tool schemas with decorators that auto-generate JSON schema.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-retry</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Intelligent retry and fallback logic across providers with circuit breakers.</div>
-          </div>
-          <div class="eco-chip">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-cache</span>
-              <span class="badge badge-planned">Planned</span>
-            </div>
-            <div class="eco-chip-desc">Semantic caching layer that deduplicates near-identical prompts to cut costs.</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Shared Foundation -->
-      <div class="eco-category">
-        <div class="eco-cat-header">
-          <span class="eco-cat-icon">🧱</span>
-          <span class="eco-cat-label">Shared Foundation</span>
-          <div class="eco-cat-line"></div>
-        </div>
-        <div class="eco-chips-grid">
-          <div class="eco-chip foundation">
-            <div class="eco-chip-top">
-              <span class="eco-chip-name">llm-schema</span>
-              <span class="badge badge-dev">🔧 In Dev</span>
-            </div>
-            <div class="eco-chip-desc">The shared OpenTelemetry-compatible event schema all tools emit and consume. The contract everything builds against &mdash; spec&#8217;d first.</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
