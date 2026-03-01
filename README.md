@@ -33,7 +33,7 @@ The goal is not to be a platform. Each Spanforge tool can go viral on its own. T
 | [**llm-diff**](#llm-diff) | LLM output quality comparison and evaluation | ✅ Done | `pip install llm-diff` |
 | [**promptlock**](#promptlock) | Prompt version control and enterprise governance | 🔧 Under development | — |
 | [**promptblock**](#promptblock) | Prompt template engine with variable management, composition, and inheritance | 🔧 Under development | — |
-| [**llm-schema**](#llm-schema) | Shared OpenTelemetry-compatible event schema all tools emit and consume | 🔧 Under development | — |
+| [**llm-toolkit-schema**](#llm-toolkit-schema) | Shared OpenTelemetry-compatible event schema all tools emit and consume | ✅ Live | `pip install llm-toolkit-schema` |
 
 ---
 
@@ -62,7 +62,7 @@ Version control and enterprise governance for prompts — so every prompt change
 - Diff and rollback across prompt versions
 - Approval workflows and access controls for enterprise teams
 - Integrates with `llm-diff` to surface quality regressions tied to specific prompt changes
-- Emits `llm-schema` events for full audit trail
+- Emits `llm-toolkit-schema` events for full audit trail
 
 > **Under development.** Follow along or contribute at [github.com/veerarag1973/promptlock](https://github.com/veerarag1973/promptlock).
 
@@ -85,18 +85,18 @@ A prompt template engine with variable management, composition, and inheritance 
 
 ## Shared Foundation
 
-### llm-schema _(under development)_
+### llm-toolkit-schema
 
 > _The shared event schema._
 
-`llm-schema` defines the OpenTelemetry-compatible JSON/OTLP event schema that all Spanforge tools emit and consume. This is the glue that makes the ecosystem composable without custom integration.
+`llm-toolkit-schema` defines the OpenTelemetry-compatible JSON/OTLP event schema that all Spanforge tools emit and consume. This is the glue that makes the ecosystem composable without custom integration.
 
 - OpenTelemetry-compatible JSON/OTLP format
 - Covers prompt events, evaluation results, governance audit trails, and template rendering spans
 - Routes cleanly into Grafana, Datadog, or any OTLP-compatible backend
-- Each Spanforge tool is independently useful; `llm-schema` makes composing them additive, not required
+- Each Spanforge tool is independently useful; `llm-toolkit-schema` makes composing them additive, not required
 
-> **Under development.** Follow along or contribute at [github.com/veerarag1973/llm-schema](https://github.com/veerarag1973/llm-schema).
+> Follow along or contribute at [github.com/veerarag1973/llm-toolkit-schema](https://github.com/veerarag1973/llm-toolkit-schema).
 
 ---
 
