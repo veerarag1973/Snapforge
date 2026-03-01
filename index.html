@@ -376,6 +376,73 @@
     }
     .obs-callout-badge span { display: block; font-size: 1.3rem; font-weight: 800; }
 
+    /* ── OBJECTIVE DOMAINS ── */
+    .domain-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem; margin-top: 2rem;
+    }
+    .domain-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .domain-card:hover { border-color: #b5c0f8; box-shadow: 0 4px 14px rgba(61,90,241,.07); }
+    .domain-icon { font-size: 1.5rem; margin-bottom: .6rem; }
+    .domain-title { font-weight: 700; font-size: .9rem; color: var(--text); margin-bottom: .3rem; }
+    .domain-desc { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── ECOSYSTEM MAP ── */
+    .ecosystem-intro {
+      color: var(--muted); max-width: 680px; margin-bottom: 2.5rem; font-size: .95rem;
+    }
+    .eco-categories { display: flex; flex-direction: column; gap: 2rem; }
+    .eco-category {}
+    .eco-cat-header {
+      display: flex; align-items: center; gap: .6rem;
+      margin-bottom: .9rem;
+    }
+    .eco-cat-icon { font-size: 1.1rem; }
+    .eco-cat-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .eco-cat-line {
+      flex: 1; height: 1px; background: var(--border);
+    }
+    .eco-chips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .75rem;
+    }
+    .eco-chip {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 10px; padding: .9rem 1rem;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .eco-chip:hover { border-color: #b5c0f8; box-shadow: 0 3px 10px rgba(0,0,0,.07); }
+    .eco-chip-top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: .5rem; margin-bottom: .35rem;
+    }
+    .eco-chip-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .82rem; font-weight: 700; color: var(--accent2);
+    }
+    .eco-chip-name.green { color: var(--accent); }
+    .eco-chip-desc { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+    .eco-chip.foundation {
+      background: linear-gradient(135deg, #f0f3ff, #f0fdf8);
+      border-color: #c5cef8;
+    }
+    .eco-chip.foundation .eco-chip-name { color: var(--accent2); }
+    .badge-planned {
+      background: #f0f2f7; color: #7a8399;
+      border: 1px solid #dde2ed;
+      font-size: .65rem; font-weight: 700; padding: .15rem .5rem;
+      border-radius: 999px; white-space: nowrap;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--surface2);
@@ -407,12 +474,15 @@
     @media (max-width: 860px) {
       nav { padding: 0 1.25rem; }
       section { padding: 3.5rem 1.25rem; }
+      .domain-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 640px) {
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
       .what-grid { grid-template-columns: 1fr; }
       .obs-grid { grid-template-columns: 1fr; }
+      .domain-grid { grid-template-columns: 1fr; }
+      .eco-chips-grid { grid-template-columns: 1fr; }
       .philosophy-grid { grid-template-columns: 1fr 1fr; }
       .obs-callout { flex-direction: column; gap: 1rem; }
       .obs-definition { padding: 1.25rem 1.25rem; }
@@ -590,16 +660,43 @@
 <section id="objective">
   <div class="container fade-in">
     <p class="section-label">Objective</p>
-    <h2>Three critical gaps addressed</h2>
-    <p style="color:var(--muted); max-width:680px;">
-      Modern LLM applications — especially agentic ones — are hard to observe. Prompts drift,
-      costs balloon silently, tool calls fail without trace, and multi-step agent runs are nearly
-      impossible to debug after the fact.
+    <h2>Full-stack observability for the agentic AI era</h2>
+    <p style="color:var(--muted); max-width:700px; margin-bottom:2rem;">
+      Spanforge&#8217;s mission is to give every team building with LLMs and agents the same
+      observability primitives that mature software engineering takes for granted &mdash;
+      across every layer of the stack.
     </p>
-    <div class="objective-pills">
-      <div class="pill"><span class="pill-icon">🔍</span><strong>Output quality</strong> — did the model produce what you expected?</div>
-      <div class="pill"><span class="pill-icon">🔐</span><strong>Prompt governance</strong> — are prompts versioned, auditable, and enterprise-ready?</div>
-      <div class="pill"><span class="pill-icon">⚗️</span><strong>Prompt engineering</strong> — can prompts be composed, templated, and reused systematically?</div>
+    <div class="domain-grid">
+      <div class="domain-card">
+        <div class="domain-icon">🗂️</div>
+        <div class="domain-title">Versioning &amp; Management</div>
+        <div class="domain-desc">Track every prompt change, enforce governance, and build complex prompts from composable, versioned blocks.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🔭</div>
+        <div class="domain-title">Observability &amp; Tracing</div>
+        <div class="domain-desc">Capture agent spans, trace tool calls, monitor costs, and audit model reasoning across every run.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🧪</div>
+        <div class="domain-title">Evaluation &amp; Testing</div>
+        <div class="domain-desc">Scenario-based evaluation, regression suites, and assertion libraries to verify output quality continuously.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🔒</div>
+        <div class="domain-title">Security &amp; Safety</div>
+        <div class="domain-desc">Prompt injection firewalls, PII redaction, and output schema enforcement before anything reaches production.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">⚙️</div>
+        <div class="domain-title">Infrastructure &amp; Runtime</div>
+        <div class="domain-desc">Self-hosted dashboards, tool schema SDKs, intelligent retry logic, and semantic caching to cut costs.</div>
+      </div>
+      <div class="domain-card">
+        <div class="domain-icon">🧱</div>
+        <div class="domain-title">Shared Foundation</div>
+        <div class="domain-desc">A single OpenTelemetry-compatible event schema every tool emits and consumes &mdash; composability without custom glue.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -609,46 +706,201 @@
 <!-- ── TOOLKIT ── -->
 <section id="toolkit">
   <div class="container fade-in">
-    <p class="section-label">The Toolkit</p>
-    <h2>Four focused tools. One shared schema.</h2>
+    <p class="section-label">The Ecosystem</p>
+    <h2>17 tools. 6 domains. One shared schema.</h2>
+    <p class="ecosystem-intro">
+      Every tool is independently installable, solves one problem sharply, and emits
+      <code>llm-schema</code> events &mdash; so they compose freely with each other and
+      drop into any OTLP-compatible backend.
+    </p>
 
-    <div class="table-wrap">
-    <table class="toolkit-table">
-      <thead>
-        <tr>
-          <th>Tool</th>
-          <th>Purpose</th>
-          <th>Status</th>
-          <th>Package</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="tool-name"><a href="#llm-diff">llm-diff</a></span></td>
-          <td class="td-muted">LLM output quality comparison and evaluation</td>
-          <td><span class="badge badge-done">✅ Done</span></td>
-          <td><span class="pkg">pip install llm-diff</span></td>
-        </tr>
-        <tr>
-          <td><span class="tool-name"><a href="#promptlock">promptlock</a></span></td>
-          <td class="td-muted">Prompt version control and enterprise governance</td>
-          <td><span class="badge badge-dev">🔧 In Dev</span></td>
-          <td><span style="color:var(--muted);font-size:.82rem;">—</span></td>
-        </tr>
-        <tr>
-          <td><span class="tool-name"><a href="#promptblock">promptblock</a></span></td>
-          <td class="td-muted">Prompt template engine with composition &amp; inheritance</td>
-          <td><span class="badge badge-dev">🔧 In Dev</span></td>
-          <td><span style="color:var(--muted);font-size:.82rem;">—</span></td>
-        </tr>
-        <tr>
-          <td><span class="tool-name"><a href="#llm-schema">llm-schema</a></span></td>
-          <td class="td-muted">Shared OpenTelemetry-compatible event schema</td>
-          <td><span class="badge badge-dev">🔧 In Dev</span></td>
-          <td><span style="color:var(--muted);font-size:.82rem;">—</span></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="eco-categories">
+
+      <!-- Versioning & Management -->
+      <div class="eco-category">
+        <div class="eco-cat-header">
+          <span class="eco-cat-icon">🗂️</span>
+          <span class="eco-cat-label">Versioning &amp; Management</span>
+          <div class="eco-cat-line"></div>
+        </div>
+        <div class="eco-chips-grid">
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name green">llm-diff</span>
+              <span class="badge badge-done">✅ Live</span>
+            </div>
+            <div class="eco-chip-desc">Diff LLM outputs across model versions, prompt changes, or time. Detect regressions, track costs.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">promptlock</span>
+              <span class="badge badge-dev">🔧 In Dev</span>
+            </div>
+            <div class="eco-chip-desc">Prompt version control and enterprise governance with approval workflows and audit trails.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">promptblock</span>
+              <span class="badge badge-dev">🔧 In Dev</span>
+            </div>
+            <div class="eco-chip-desc">Prompt template engine with variable injection, composition, and inheritance.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Observability & Tracing -->
+      <div class="eco-category">
+        <div class="eco-cat-header">
+          <span class="eco-cat-icon">🔭</span>
+          <span class="eco-cat-label">Observability &amp; Tracing</span>
+          <div class="eco-cat-line"></div>
+        </div>
+        <div class="eco-chips-grid">
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-trace</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Framework-agnostic agent span tracing, fully OpenTelemetry-compatible.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-cost</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Token + USD cost tracking with budgets and trend alerts across every call.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-inspect</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Tool call inspector: arguments, returns, and model reasoning audit for every step.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Evaluation & Testing -->
+      <div class="eco-category">
+        <div class="eco-cat-header">
+          <span class="eco-cat-icon">🧪</span>
+          <span class="eco-cat-label">Evaluation &amp; Testing</span>
+          <div class="eco-cat-line"></div>
+        </div>
+        <div class="eco-chips-grid">
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">evalkit</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Scenario-based agent evaluation framework with regression testing pipelines.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">agentping</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Agent health checker &mdash; runs automated test suites against live agent endpoints.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-assert</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Assertion library for LLM outputs: contains X, matches schema, sentiment &gt; Y.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security & Safety -->
+      <div class="eco-category">
+        <div class="eco-cat-header">
+          <span class="eco-cat-icon">🔒</span>
+          <span class="eco-cat-label">Security &amp; Safety</span>
+          <div class="eco-cat-line"></div>
+        </div>
+        <div class="eco-chips-grid">
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">promptguard</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Prompt injection firewall with input/output scanning and configurable guardrail policies.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-redact</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">PII detection and redaction in prompts and responses before they touch any log.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-fence</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Output schema enforcement and type-safe structured output validation at runtime.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Infrastructure & Runtime -->
+      <div class="eco-category">
+        <div class="eco-cat-header">
+          <span class="eco-cat-icon">⚙️</span>
+          <span class="eco-cat-label">Infrastructure &amp; Runtime</span>
+          <div class="eco-cat-line"></div>
+        </div>
+        <div class="eco-chips-grid">
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">agentboard</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Self-hosted local dashboard for agent run history &mdash; no signup, no cloud required.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">toolsmith</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">SDK for defining LLM tool schemas with decorators that auto-generate JSON schema.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-retry</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Intelligent retry and fallback logic across providers with circuit breakers.</div>
+          </div>
+          <div class="eco-chip">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-cache</span>
+              <span class="badge badge-planned">Planned</span>
+            </div>
+            <div class="eco-chip-desc">Semantic caching layer that deduplicates near-identical prompts to cut costs.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shared Foundation -->
+      <div class="eco-category">
+        <div class="eco-cat-header">
+          <span class="eco-cat-icon">🧱</span>
+          <span class="eco-cat-label">Shared Foundation</span>
+          <div class="eco-cat-line"></div>
+        </div>
+        <div class="eco-chips-grid">
+          <div class="eco-chip foundation">
+            <div class="eco-chip-top">
+              <span class="eco-chip-name">llm-schema</span>
+              <span class="badge badge-dev">🔧 In Dev</span>
+            </div>
+            <div class="eco-chip-desc">The shared OpenTelemetry-compatible event schema all tools emit and consume. The contract everything builds against &mdash; spec&#8217;d first.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
