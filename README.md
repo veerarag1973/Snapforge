@@ -1,10 +1,10 @@
-<p><img src="logo.png" alt="Snapforge" width="36" style="vertical-align:middle;margin-right:8px;"/> <strong>A composable open-source toolkit for LLM and agentic AI observability.</strong></p>
+<p><img src="logo.png" alt="Spanforge" width="36" style="vertical-align:middle;margin-right:8px;"/> <strong>A composable open-source toolkit for LLM and agentic AI observability.</strong></p>
 
 ---
 
-## What is Snapforge?
+## What is Spanforge?
 
-Snapforge is a suite of focused, independent tools that together form a complete observability ecosystem for LLM applications and agentic AI systems.
+Spanforge is a suite of focused, independent tools that together form a complete observability ecosystem for LLM applications and agentic AI systems.
 
 Each tool solves one problem sharply. Each is installable on its own. Together, they share a common OpenTelemetry-compatible event schema — so outputs compose freely, route into each other without custom integration, and drop into existing stacks like Grafana or Datadog without friction.
 
@@ -16,13 +16,13 @@ Built for individual developers, DevOps teams, and enterprise ML engineers — a
 
 Modern LLM applications — especially agentic ones — are hard to observe. Prompts drift, costs balloon silently, tool calls fail without trace, and multi-step agent runs are nearly impossible to debug after the fact.
 
-Snapforge addresses three critical gaps in the LLM development lifecycle:
+Spanforge addresses three critical gaps in the LLM development lifecycle:
 
 - **Output quality** — did the model produce what you expected?
 - **Prompt governance** — are prompts versioned, auditable, and enterprise-ready?
 - **Prompt engineering** — can prompts be composed, templated, and reused systematically?
 
-The goal is not to be a platform. Each Snapforge tool can go viral on its own. The ecosystem emerges from composition — not from a hosted dashboard or locked-in infrastructure.
+The goal is not to be a platform. Each Spanforge tool can go viral on its own. The ecosystem emerges from composition — not from a hosted dashboard or locked-in infrastructure.
 
 ---
 
@@ -89,12 +89,12 @@ A prompt template engine with variable management, composition, and inheritance 
 
 > _The shared event schema._
 
-`llm-schema` defines the OpenTelemetry-compatible JSON/OTLP event schema that all Snapforge tools emit and consume. This is the glue that makes the ecosystem composable without custom integration.
+`llm-schema` defines the OpenTelemetry-compatible JSON/OTLP event schema that all Spanforge tools emit and consume. This is the glue that makes the ecosystem composable without custom integration.
 
 - OpenTelemetry-compatible JSON/OTLP format
 - Covers prompt events, evaluation results, governance audit trails, and template rendering spans
 - Routes cleanly into Grafana, Datadog, or any OTLP-compatible backend
-- Each Snapforge tool is independently useful; `llm-schema` makes composing them additive, not required
+- Each Spanforge tool is independently useful; `llm-schema` makes composing them additive, not required
 
 > **Under development.** Follow along or contribute at [github.com/veerarag1973/llm-schema](https://github.com/veerarag1973/llm-schema).
 
