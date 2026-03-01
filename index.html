@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Spanforge — A composable open-source toolkit for LLM and agentic AI observability." />
+  <meta property="og:title" content="Spanforge" />
+  <meta property="og:description" content="A composable open-source toolkit for LLM and agentic AI observability." />
+  <meta property="og:image" content="logo.png" />
+  <title>Spanforge — LLM & Agentic AI Observability</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0a0c10;
+      --surface:  #111318;
+      --border:   #1e2130;
+      --accent:   #00d9a3;
+      --accent2:  #6c8eff;
+      --accent3:  #f7b731;
+      --text:     #e2e8f0;
+      --muted:    #7a8399;
+      --radius:   12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+      background: rgba(10,12,16,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1.05rem; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-brand img { width: 28px; height: 28px; border-radius: 6px; }
+    .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: .875rem;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+    }
+    .hero-glow {
+      position: absolute; top: -120px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 500px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,217,163,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-logo {
+      width: 72px; height: 72px;
+      border-radius: 16px;
+      margin: 0 auto 1.5rem;
+      display: block;
+      box-shadow: 0 0 40px rgba(0,217,163,.25);
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, #fff 30%, var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: .75rem;
+    }
+    .hero-sub {
+      font-size: 1.15rem; color: var(--muted);
+      max-width: 600px; margin: 0 auto 2.5rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .65rem 1.4rem; border-radius: 8px;
+      font-size: .9rem; font-weight: 600; text-decoration: none;
+      transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #06160f;
+    }
+    .btn-primary:hover { background: #00f2b8; box-shadow: 0 0 20px rgba(0,217,163,.4); }
+    .btn-secondary {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { padding: 4.5rem 1.5rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-size: .75rem; font-weight: 600; letter-spacing: .12em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: .6rem;
+    }
+    h2 {
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      font-weight: 700; letter-spacing: -.02em; margin-bottom: 1rem;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ── WHAT IS ── */
+    .what-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .what-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+    }
+    .what-card-title {
+      font-size: .85rem; font-weight: 600; color: var(--accent);
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem;
+    }
+    .what-card p { font-size: .9rem; color: var(--muted); }
+
+    /* ── OBJECTIVE PILLS ── */
+    .objective-pills { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 999px; padding: .45rem 1.1rem;
+      font-size: .85rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .pill-icon { font-size: 1rem; }
+
+    /* ── TOOLKIT TABLE ── */
+    .toolkit-table {
+      width: 100%; border-collapse: collapse; margin-top: 2rem;
+      font-size: .9rem;
+    }
+    .toolkit-table th {
+      text-align: left; padding: .75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted); font-weight: 500; font-size: .8rem;
+      text-transform: uppercase; letter-spacing: .08em;
+    }
+    .toolkit-table td {
+      padding: .9rem 1rem; border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .toolkit-table tr:last-child td { border-bottom: none; }
+    .toolkit-table tr:hover td { background: rgba(255,255,255,.02); }
+    .tool-name {
+      font-weight: 600; color: var(--accent2);
+      font-family: 'JetBrains Mono', monospace; font-size: .9rem;
+    }
+    .tool-name a { color: inherit; text-decoration: none; }
+    .tool-name a:hover { text-decoration: underline; }
+    .badge {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .25rem .65rem; border-radius: 999px;
+      font-size: .75rem; font-weight: 600;
+    }
+    .badge-done   { background: rgba(0,217,163,.12); color: var(--accent); border: 1px solid rgba(0,217,163,.3); }
+    .badge-dev    { background: rgba(247,183,49,.1);  color: var(--accent3); border: 1px solid rgba(247,183,49,.3); }
+    .pkg {
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+      background: rgba(108,142,255,.1); color: var(--accent2);
+      border: 1px solid rgba(108,142,255,.25);
+      padding: .2rem .55rem; border-radius: 6px;
+    }
+
+    /* ── TOOL CARDS ── */
+    .tool-cards { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+    .tool-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+      position: relative; overflow: hidden;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .tool-card:hover {
+      border-color: rgba(0,217,163,.3);
+      box-shadow: 0 0 30px rgba(0,217,163,.06);
+    }
+    .tool-card-accent {
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+    .tool-card-accent.blue  { background: linear-gradient(90deg, var(--accent2), transparent); }
+    .tool-card-accent.gold  { background: linear-gradient(90deg, var(--accent3), transparent); }
+    .tool-card-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;
+    }
+    .tool-card-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.15rem; font-weight: 700; color: var(--text);
+    }
+    .tool-tagline {
+      font-size: .85rem; color: var(--muted); font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .tool-features {
+      list-style: none; display: flex; flex-direction: column; gap: .45rem;
+      margin-bottom: 1.25rem;
+    }
+    .tool-features li {
+      font-size: .875rem; display: flex; align-items: baseline; gap: .5rem;
+    }
+    .tool-features li::before {
+      content: '—'; color: var(--accent); font-weight: 700; flex-shrink: 0;
+    }
+    .tool-cta-row { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .wip-note {
+      font-size: .82rem; color: var(--muted);
+      background: rgba(247,183,49,.05);
+      border: 1px solid rgba(247,183,49,.2);
+      border-radius: 8px; padding: .65rem 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── SCHEMA CARD ── */
+    .schema-card {
+      background: linear-gradient(135deg, rgba(108,142,255,.08), rgba(0,217,163,.04));
+      border: 1px solid rgba(108,142,255,.2);
+      border-radius: var(--radius); padding: 2rem; margin-top: 2rem;
+    }
+    .schema-card h3 {
+      font-family: 'JetBrains Mono', monospace; font-size: 1.05rem;
+      margin-bottom: .5rem; color: var(--accent2);
+    }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem; margin-top: 2rem;
+    }
+    .philosophy-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.5rem;
+      transition: border-color .2s;
+    }
+    .philosophy-card:hover { border-color: rgba(108,142,255,.3); }
+    .philosophy-icon { font-size: 1.5rem; margin-bottom: .6rem; }
+    .philosophy-title { font-weight: 700; font-size: .95rem; margin-bottom: .4rem; }
+    .philosophy-card p { font-size: .85rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--muted); font-size: .85rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-inner { max-width: 1000px; margin: 0 auto; }
+    .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .what-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .toolkit-table { display: none; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-brand" href="#">
+    <img src="logo.png" alt="Spanforge logo" />
+    Spanforge
+  </a>
+  <ul class="nav-links">
+    <li><a href="#what">About</a></li>
+    <li><a href="#toolkit">Toolkit</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="https://github.com/veerarag1973" target="_blank" rel="noopener">GitHub ↗</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-glow"></div>
+  <img class="hero-logo" src="logo.png" alt="Spanforge" />
+  <h1>Spanforge</h1>
+  <p class="hero-sub">A composable open-source toolkit for LLM and agentic AI observability.</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#toolkit">Explore the Toolkit</a>
+    <a class="btn btn-secondary" href="https://github.com/veerarag1973" target="_blank" rel="noopener">View on GitHub ↗</a>
+  </div>
+</header>
+
+<hr class="section-divider" />
+
+<!-- ── WHAT IS ── -->
+<section id="what">
+  <div class="container fade-in">
+    <p class="section-label">Overview</p>
+    <h2>What is Spanforge?</h2>
+    <p style="color:var(--muted); max-width:680px;">
+      Spanforge is a suite of focused, independent tools that together form a complete
+      observability ecosystem for LLM applications and agentic AI systems.
+    </p>
+
+    <div class="what-grid">
+      <div class="what-card">
+        <div class="what-card-title">Composable by design</div>
+        <p>Each tool solves one problem sharply and is installable on its own. Together, they share a common OpenTelemetry‑compatible event schema — so outputs compose freely without custom integration.</p>
+      </div>
+      <div class="what-card">
+        <div class="what-card-title">Drop-in compatibility</div>
+        <p>Route data into existing stacks like Grafana or Datadog without friction. Built for individual developers, DevOps teams, and enterprise ML engineers — at whatever layer they need it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ── OBJECTIVE ── -->
+<section id="objective">
+  <div class="container fade-in">
+    <p class="section-label">Objective</p>
+    <h2>Three critical gaps addressed</h2>
+    <p style="color:var(--muted); max-width:680px;">
+      Modern LLM applications — especially agentic ones — are hard to observe. Prompts drift,
+      costs balloon silently, tool calls fail without trace, and multi-step agent runs are nearly
+      impossible to debug after the fact.
+    </p>
+    <div class="objective-pills">
+      <div class="pill"><span class="pill-icon">🔍</span><strong>Output quality</strong> — did the model produce what you expected?</div>
+      <div class="pill"><span class="pill-icon">🔐</span><strong>Prompt governance</strong> — are prompts versioned, auditable, and enterprise-ready?</div>
+      <div class="pill"><span class="pill-icon">⚗️</span><strong>Prompt engineering</strong> — can prompts be composed, templated, and reused systematically?</div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ── TOOLKIT ── -->
+<section id="toolkit">
+  <div class="container fade-in">
+    <p class="section-label">The Toolkit</p>
+    <h2>Four focused tools. One shared schema.</h2>
+
+    <table class="toolkit-table">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Purpose</th>
+          <th>Status</th>
+          <th>Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tool-name"><a href="#llm-diff">llm-diff</a></span></td>
+          <td style="color:var(--muted);">LLM output quality comparison and evaluation</td>
+          <td><span class="badge badge-done">✅ Done</span></td>
+          <td><span class="pkg">pip install llm-diff</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-name"><a href="#promptlock">promptlock</a></span></td>
+          <td style="color:var(--muted);">Prompt version control and enterprise governance</td>
+          <td><span class="badge badge-dev">🔧 In Dev</span></td>
+          <td><span style="color:var(--muted);font-size:.82rem;">—</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-name"><a href="#promptblock">promptblock</a></span></td>
+          <td style="color:var(--muted);">Prompt template engine with composition &amp; inheritance</td>
+          <td><span class="badge badge-dev">🔧 In Dev</span></td>
+          <td><span style="color:var(--muted);font-size:.82rem;">—</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-name"><a href="#llm-schema">llm-schema</a></span></td>
+          <td style="color:var(--muted);">Shared OpenTelemetry-compatible event schema</td>
+          <td><span class="badge badge-dev">🔧 In Dev</span></td>
+          <td><span style="color:var(--muted);font-size:.82rem;">—</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ── TOOLS DEEP DIVE ── -->
+<section id="tools">
+  <div class="container fade-in">
+    <p class="section-label">Tools</p>
+    <h2>Deep dive</h2>
+
+    <div class="tool-cards">
+
+      <!-- llm-diff -->
+      <div class="tool-card" id="llm-diff">
+        <div class="tool-card-accent"></div>
+        <div class="tool-card-header">
+          <div>
+            <div class="tool-card-name">llm-diff</div>
+            <div class="tool-tagline">The evaluation layer.</div>
+          </div>
+          <span class="badge badge-done">✅ Available</span>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">
+          Diffs LLM outputs across model versions, prompt changes, or time — so you can see
+          exactly how your outputs shifted and whether quality improved or regressed.
+        </p>
+        <ul class="tool-features">
+          <li>Side-by-side output comparison</li>
+          <li>Regression detection across prompt versions</li>
+          <li>Per-call cost tracking</li>
+          <li>Pairs with <code style="font-size:.82rem;color:var(--accent2);">promptlock</code> to tie quality regressions back to specific prompt versions</li>
+        </ul>
+        <div class="tool-cta-row">
+          <a class="btn btn-primary" href="https://github.com/veerarag1973/llmdiff" target="_blank" rel="noopener">View llm-diff ↗</a>
+          <span class="pkg">pip install llm-diff</span>
+        </div>
+      </div>
+
+      <!-- promptlock -->
+      <div class="tool-card" id="promptlock">
+        <div class="tool-card-accent blue"></div>
+        <div class="tool-card-header">
+          <div>
+            <div class="tool-card-name">promptlock</div>
+            <div class="tool-tagline">The prompt governance layer.</div>
+          </div>
+          <span class="badge badge-dev">🔧 Under Development</span>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">
+          Version control and enterprise governance for prompts — so every prompt change is
+          tracked, auditable, and reversible. Designed for teams managing prompts at scale.
+        </p>
+        <ul class="tool-features">
+          <li>Full version history for every prompt</li>
+          <li>Diff and rollback across prompt versions</li>
+          <li>Approval workflows and access controls for enterprise teams</li>
+          <li>Integrates with <code style="font-size:.82rem;color:var(--accent);">llm-diff</code> to surface quality regressions tied to specific prompt changes</li>
+          <li>Emits <code style="font-size:.82rem;color:var(--accent2);">llm-schema</code> events for a full audit trail</li>
+        </ul>
+        <div class="wip-note">
+          Under development. Follow along or contribute on GitHub.
+        </div>
+        <div class="tool-cta-row">
+          <a class="btn btn-secondary" href="https://github.com/veerarag1973/promptlock" target="_blank" rel="noopener">Follow on GitHub ↗</a>
+        </div>
+      </div>
+
+      <!-- promptblock -->
+      <div class="tool-card" id="promptblock">
+        <div class="tool-card-accent gold"></div>
+        <div class="tool-card-header">
+          <div>
+            <div class="tool-card-name">promptblock</div>
+            <div class="tool-tagline">The prompt engineering layer.</div>
+          </div>
+          <span class="badge badge-dev">🔧 Under Development</span>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">
+          A prompt template engine with variable management, composition, and inheritance —
+          so complex prompts can be built systematically rather than assembled by hand.
+        </p>
+        <ul class="tool-features">
+          <li>Variable injection with type validation</li>
+          <li>Template composition — build complex prompts from reusable blocks</li>
+          <li>Inheritance — extend and override base templates cleanly</li>
+          <li>Works alongside <code style="font-size:.82rem;color:var(--accent2);">promptlock</code> for versioned, governed template libraries</li>
+        </ul>
+        <div class="wip-note">
+          Under development. Follow along or contribute on GitHub.
+        </div>
+        <div class="tool-cta-row">
+          <a class="btn btn-secondary" href="https://github.com/veerarag1973/promptblock" target="_blank" rel="noopener">Follow on GitHub ↗</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- llm-schema -->
+    <div class="schema-card fade-in" id="llm-schema">
+      <h3>llm-schema <span style="font-size:.75rem;font-weight:400;color:var(--muted);margin-left:.5rem;">shared foundation</span></h3>
+      <p class="tool-tagline">The shared event schema.</p>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">
+        Defines the OpenTelemetry-compatible JSON/OTLP event schema that all Spanforge tools emit
+        and consume — the glue that makes the ecosystem composable without custom integration.
+      </p>
+      <ul class="tool-features">
+        <li>OpenTelemetry-compatible JSON/OTLP format</li>
+        <li>Covers prompt events, evaluation results, governance audit trails, and template rendering spans</li>
+        <li>Routes cleanly into Grafana, Datadog, or any OTLP-compatible backend</li>
+        <li>Independently useful tools; <code style="font-size:.82rem;color:var(--accent2);">llm-schema</code> makes composing them additive, not required</li>
+      </ul>
+      <a class="btn btn-secondary" href="https://github.com/veerarag1973/llm-schema" target="_blank" rel="noopener" style="margin-top:.25rem;">Follow on GitHub ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ── PHILOSOPHY ── -->
+<section id="philosophy">
+  <div class="container fade-in">
+    <p class="section-label">Philosophy</p>
+    <h2>Principles that guide every tool</h2>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-card">
+        <div class="philosophy-icon">🎯</div>
+        <div class="philosophy-title">One tool, one job</div>
+        <p>Sharp identity over sprawling features. Every tool does one thing exceptionally well.</p>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-icon">🧩</div>
+        <div class="philosophy-title">Composable over bundled</div>
+        <p>Adopt one tool or all four — at your own pace, with zero forced dependencies.</p>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-icon">📊</div>
+        <div class="philosophy-title">Structured data over dashboards</div>
+        <p>Emit clean, portable data. Let your existing ecosystem — Grafana, Datadog, etc. — visualize it.</p>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-icon">🔓</div>
+        <div class="philosophy-title">Open source first</div>
+        <p>Every tool lives on PyPI and GitHub with its own docs, community, and entry point.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/veerarag1973/llmdiff" target="_blank" rel="noopener">llm-diff</a>
+      <a href="https://github.com/veerarag1973/promptlock" target="_blank" rel="noopener">promptlock</a>
+      <a href="https://github.com/veerarag1973/promptblock" target="_blank" rel="noopener">promptblock</a>
+      <a href="https://github.com/veerarag1973/llm-schema" target="_blank" rel="noopener">llm-schema</a>
+    </div>
+    <p>Released under the <a href="LICENSE">MIT License</a>. Built in the open.</p>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
